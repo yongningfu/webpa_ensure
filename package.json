@@ -1,0 +1,16 @@
+{
+  "name": "webpack-ensure",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rimraf dist && webpack"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "html-webpack-plugin": "^2.25.0",
+    "webpack": "^1.14.0"
+  }
+}

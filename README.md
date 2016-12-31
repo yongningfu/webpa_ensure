@@ -49,7 +49,7 @@ mapBtn.click(function() {
 定义得到这个js文件后，需要做什么业务逻辑操作。
 
 ok,那么我们就利用webpack的api去帮我们完成这样一件事情。点击后才进行异步加载百度地图js，上面
-的click加载js时我们自己写的，webpack可以轻松帮我们搞定这样的事情，而不用我们首写
+的click加载js时我们自己写的，webpack可以轻松帮我们搞定这样的事情，而不用我们手写
 
 ```js
 mapBtn.click(function() {
@@ -58,7 +58,7 @@ mapBtn.click(function() {
   })
 })
 ```
-搞定！当然还是分析一下。require.ensure这个函数是一个代码分离的分割线，表示回调里面的require
+搞定！当然还是分析一下。require.ensure这个函数是一个代码分离的分割线，表示 回调里面的require
 是我们想要进行分割出去的，即require('./baidumap.js')，把baidumap.js分割出去，形成一个
 webpack打包的单独js文件。当然ensure里面也是可以写一些同步的require的，比如
 
@@ -73,10 +73,9 @@ mapBtn.click(function() {
   })
 })
 ```
-也就是说，ensure会把没有使用过的require资源进行独立分成成一个js. ensure的第一个参数是什么
-意思呢？[], 其实就是因为 当前这个 require.ensure所依赖的其他 异步加载的模块。你想啊？如果
-A 和 B都是异步加载的，B中需要A，那么B下载之前，是不是先要下载A啊？，所以直接来ensure的第
-一个参数[] 加油A 即可 ['A']
+也就是说，ensure会把没有使用过的require资源进行独立分成成一个js文件. require.ensure的
+第一个参数是什么意思呢？[], 其实就是 当前这个 require.ensure所依赖的其他 异步加载的模块。你想啊？如果A 和 B都是异步加载的，B中需要A，那么B下载之前，是不是先要下载A啊？，所以ensure的第一个参数[]
+也是请求下载的模块，如果想加载A require.ensure(['A.js'],function) 即可
 
 说完了上面的原理。下面就实践一下
 
@@ -160,12 +159,12 @@ webpack打包后，形成
 
 ![](./image/img4.gif)
 
-发现加载了 1.1....js
+发现浏览器下载并加载了 1.1....js
 
 点击 bbtn
 
 ![](./image/img5.gif)
-发现加载了 2.2....js
+发现浏览器下载并加载了 2.2....js
 
 ok 全部完成
 
